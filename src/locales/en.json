@@ -1,0 +1,16 @@
+{
+  "mobile_nav": {
+    "home": "Home",
+    "cards": "Cards",
+    "credit": "Credit",
+    "payments": "Payments",
+    "account": "Profile"
+  },
+  "desktop_nav": {
+    "home": "Home",
+    "cards": "Cards",
+    "credit": "Credit",
+    "payments": "Payments",
+    "account": "Settings"
+  }
+}
