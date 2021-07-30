@@ -4,8 +4,8 @@ export default {
     state(variable) {
       return get(this.$store.state, variable);
     },
-    dispatch(action, data) {
-      this.$store.dispatch(action, data);
+    async dispatch(action, data) {
+      await this.$store.dispatch(action, data);
     }
   }
 };

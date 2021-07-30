@@ -8,7 +8,7 @@
 					white
 					d-flex
 					align-center
-					justify-space-between
+					justify-end
 					border-radius-6
 					py-1
 					pb-5
@@ -16,7 +16,7 @@
 					toggle-number
 				"
 			>
-				<v-icon color="primary" class="mr-2" size="12">mdi-eye</v-icon>
+				<v-icon color="primary" class="mr-2" size="16">mdi-eye</v-icon>
 				<span class="primary--text"
 					>{{ isShow ? 'Hide' : 'Show' }} card number</span
 				>

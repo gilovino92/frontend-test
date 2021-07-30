@@ -7,13 +7,11 @@ export default {
     CustomIcon
   },
   data() {
-    return {};
+    return {
+      isPortableDevice: false
+    };
   },
-  computed: {
-    isMobile() {
-      return this.$vuetify.breakpoint.mdAndDown;
-    }
-  },
+  computed: {},
   methods: {
     freeze,
     unFreeze,
@@ -40,6 +38,19 @@ export default {
     back() {
       // Do something before goback
       this.$router.go(-1);
+    },
+    onResize() {
+      this.isPortableDevice = window.innerWidth < 1264;
     }
+  },
+  mounted() {
+    this.onResize();
+
+    window.addEventListener('resize', this.onResize, { passive: true });
+  },
+  beforeDestroy() {
+    if (typeof window === 'undefined') return;
+
+    window.removeEventListener('resize', this.onResize, { passive: true });
   }
 };

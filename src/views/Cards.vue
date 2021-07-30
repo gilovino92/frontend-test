@@ -3,8 +3,8 @@
 		class="card-view"
 		elevation="0"
 		:class="{
-			'white--text mobile-mode': isMobile,
-			' py-15 white desktop-mode': !isMobile,
+			'white--text mobile-mode': isPortableDevice,
+			' py-15 white desktop-mode': !isPortableDevice,
 		}"
 	>
 		<div class="fixed-content">
@@ -13,8 +13,8 @@
 			</div>
 			<v-tabs
 				v-model="tab"
-				:color="isMobile ? 'white' : 'black'"
-				:dark="isMobile"
+				:color="isPortableDevice ? 'white' : 'black'"
+				:dark="isPortableDevice"
 				background-color="transparent"
 				class="mb-4 px-6"
 			>
@@ -33,7 +33,7 @@
 			<v-tabs-items v-model="tab" touchless>
 				<v-tab-item value="debit_cards">
 					<!-- Template for Mobile -->
-					<div class="card-mobile" v-if="isMobile">
+					<div class="card-mobile" v-if="isPortableDevice">
 						<swiper
 							class="swiper"
 							:options="swiperOption"
@@ -49,31 +49,33 @@
 						</swiper>
 					</div>
 					<!-- Template for Desktop -->
-					<v-card class="pa-10 d-flex aling-center" color="transparent" v-else>
-						<div class="d-flex align-center flex-column left-column mr-12">
-							<swiper
-								class="swiper"
-								:options="swiperOption"
-								style="max-width: 100%"
-							>
-								<swiper-slide v-for="i in [1, 2, 3, 4]" :key="i">
-									<bank-card class="mb-12" />
-								</swiper-slide>
-								<div
-									class="swiper-pagination swiper-pagination-bullets"
-									slot="pagination"
-								></div>
-							</swiper>
-							<card-control
-								:controllers="controllers"
-								class="pa-4 border-radius-16"
-								color="#EDF3FF"
-							/>
-						</div>
-						<div class="right-column">
-							<card-widgets :widgets="widgets" />
-						</div>
-					</v-card>
+					<v-container v-else>
+						<v-card class="pa-10 d-flex aling-center" color="transparent">
+							<div class="d-flex align-center flex-column left-column mr-12">
+								<swiper
+									class="swiper"
+									:options="swiperOption"
+									style="max-width: 100%"
+								>
+									<swiper-slide v-for="i in [1, 2, 3, 4]" :key="i">
+										<bank-card class="mb-12" />
+									</swiper-slide>
+									<div
+										class="swiper-pagination swiper-pagination-bullets"
+										slot="pagination"
+									></div>
+								</swiper>
+								<card-control
+									:controllers="controllers"
+									class="pa-4 border-radius-16"
+									color="#EDF3FF"
+								/>
+							</div>
+							<div class="right-column">
+								<card-widgets :widgets="widgets" />
+							</div>
+						</v-card>
+					</v-container>
 				</v-tab-item>
 				<v-tab-item value="all_cards"> </v-tab-item>
 			</v-tabs-items>
@@ -81,11 +83,10 @@
 		<!-- Controller for mobile -->
 		<div
 			class="mobile-controller pb-6"
-			v-show="isMobile && tab === 'debit_cards'"
+			v-show="isPortableDevice && tab === 'debit_cards'"
 		>
 			<card-control :controllers="controllers" class="pa-4" color="#EDF3FF" />
 			<div class="pa-6">
-				<card-widgets :widgets="widgets" />
 				<card-widgets :widgets="widgets" />
 			</div>
 		</div>

@@ -1,0 +1,22 @@
+.loan-amount-input.v-text-field.v-input {
+  .v-input__control {
+    .v-input__slot {
+      &:before {
+        border: none;
+      }
+    }
+  }
+  input {
+    text-align: right;
+    &:focus {
+      text-align: left;
+    }
+  }
+  .v-text-field__slot {
+    input {
+      color: var(--v-secondary-base);
+      padding: 4px 0 0 !important;
+      font-weight: 700;
+    }
+  }
+}

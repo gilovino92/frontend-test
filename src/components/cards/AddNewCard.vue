@@ -1,13 +1,13 @@
 <template>
 	<v-btn
 		dense
-		:color="isMobile ? '#23CEFD' : '#325BAF'"
+		:color="isPortableDevice ? '#23CEFD' : '#325BAF'"
 		dark
 		elevation="0"
-		:text="isMobile"
-		:small="isMobile"
+		:text="isPortableDevice"
+		:small="isPortableDevice"
 	>
-		<v-icon class="mr-2" :small="isMobile">mdi-plus-circle</v-icon>
+		<v-icon class="mr-2" :small="isPortableDevice">mdi-plus-circle</v-icon>
 		<span class="font-weight-bold">New card</span>
 	</v-btn>
 </template>

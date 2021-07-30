@@ -1,5 +1,5 @@
 <template>
-	<div class="home-view"></div>
+	<div></div>
 </template>
 
 <script>
@@ -15,10 +15,3 @@ export default {
 	async created() {},
 };
 </script>
-<style lang="scss" scoped>
-.home-view {
-	width: 100%;
-	min-height: 200vh;
-	background: blue;
-}
-</style>

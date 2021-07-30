@@ -11,17 +11,17 @@ const axiosFactory = (url = null) =>
     }
   });
 // Public Axios Instance with base URL
-const publicAPI = axiosFactory();
+const api = axiosFactory();
 
 // intercepter for response
-publicAPI.interceptors.request.use(
+api.interceptors.request.use(
   config => {
     return config;
   },
   error => Promise.reject(error)
 );
 
-publicAPI.interceptors.response.use(
+api.interceptors.response.use(
   response => {
     if (response.status === 200 || response.status === 201) {
       return Promise.resolve(response);
@@ -35,4 +35,4 @@ publicAPI.interceptors.response.use(
   }
 );
 
-export { defaultPaginationParams, axiosFactory, publicAPI };
+export { defaultPaginationParams, axiosFactory, api };

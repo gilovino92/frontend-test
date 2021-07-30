@@ -1,5 +1,12 @@
 <template>
 	<v-app class="app-wrapper">
+		<v-snackbar v-model="snackbar" :color="message.color" top right>
+			{{ message.text }}
+
+			<template v-slot:action="{ attrs }">
+				<v-btn text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
+			</template>
+		</v-snackbar>
 		<v-overlay
 			:value="overlay"
 			opacity="0.3"
@@ -16,9 +23,18 @@
 
 		<v-main
 			class="main-wrapper"
-			:class="{ 'away-from-nav': !isMobile, secondary: isMobile }"
+			:class="{
+				'away-from-nav': !isPortableDevice,
+				secondary: isPortableDevice,
+			}"
 		>
-			<v-icon color="primary" size="25" class="mobile-logo">$MobileLogo</v-icon>
+			<v-icon
+				color="primary"
+				size="25"
+				class="mobile-logo"
+				v-if="isPortableDevice"
+				>$MobileLogo</v-icon
+			>
 			<router-view></router-view>
 		</v-main>
 		<nav-bar />
@@ -31,7 +47,7 @@ import '@/style/main.scss';
 export default {
 	components: { NavBar },
 	computed: {
-		...mapState('app', ['showOverlay', 'isLoading']),
+		...mapState('app', ['showOverlay', 'isLoading', 'message']),
 		overlay: {
 			get() {
 				return this.showOverlay;
@@ -40,6 +56,21 @@ export default {
 				this.toggleOverlay(value);
 			},
 		},
+		snackbar: {
+			get() {
+				return this.message.display;
+			},
+			set(value) {
+				this.dispatch('app/toggleMessage', { ...this.message, display: value });
+			},
+		},
+	},
+	async created() {
+		this.toggleLoading(true);
+		await this.dispatch('user/getUserProfile');
+		await this.dispatch('loan/getLoans');
+		await this.dispatch('transactions/getTransactions');
+		this.toggleLoading(false);
 	},
 };
 </script>

@@ -60,7 +60,8 @@
 </template>
 
 <script>
-// 'BusinessAndFinance', 'Megaphone', 'Flights', 'FileStorage';
+import { mapState } from 'vuex';
+
 export default {
 	name: 'RecentTransactions',
 	data() {
@@ -80,45 +81,10 @@ export default {
 				2: 'Flights',
 				3: 'Megaphone',
 			},
-			transactions: [
-				{
-					category: 1,
-					type: 'deposit',
-					details: {
-						name: 'Hamleys',
-						date: '20 May 2020',
-						amount: '150',
-					},
-				},
-				{
-					category: 2,
-					type: 'widthdraw',
-					details: {
-						name: 'Hamleys',
-						date: '20 May 2020',
-						amount: '150',
-					},
-				},
-				{
-					category: 3,
-					type: 'widthdraw',
-					details: {
-						name: 'Hamleys',
-						date: '20 May 2020',
-						amount: '150',
-					},
-				},
-				{
-					category: 1,
-					type: 'widthdraw',
-					details: {
-						name: 'Hamleys',
-						date: '20 May 2020',
-						amount: '150',
-					},
-				},
-			],
 		};
+	},
+	computed: {
+		...mapState('transactions', ['transactions']),
 	},
 };
 </script>

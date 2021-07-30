@@ -1,15 +1,15 @@
 import { api } from '@/httpClient/axios';
 export default {
-  async createTransaction({ dispatch }, payload) {
+  async createLoan({ dispatch }, payload) {
     try {
-      const response = await api.post('transactions', payload);
+      const response = await api.post('loans', payload);
       if (response.status !== 201) return;
-      await dispatch('getTransactions');
+      await dispatch('getLoans');
       dispatch(
         'app/toggleMessage',
         {
           display: true,
-          text: 'Succeeded',
+          text: 'Repaid',
           color: 'success'
         },
         { root: true }
@@ -27,16 +27,16 @@ export default {
       console.log(error);
     }
   },
-  async getTransactions({ commit, rootState }) {
+  async getLoans({ commit, dispatch, rootState }) {
     try {
-      const response = await api.get('transactions', {
+      const response = await api.get('loans', {
         params: {
-          ownerID: rootState.user.profile.id
+          ownderID: rootState.user.profile.id
         }
       });
       if (response.status !== 200) return;
       commit('setValue', {
-        key: 'transactions',
+        key: 'loans',
         value: response.data.sort((b, a) => {
           if (a.createdAt > b.createdAt) {
             return 1;
@@ -48,6 +48,15 @@ export default {
         })
       });
     } catch (error) {
+      dispatch(
+        'app/toggleMessage',
+        {
+          display: true,
+          text: 'Error',
+          color: 'error'
+        },
+        { root: true }
+      );
       console.log(error);
     }
   }

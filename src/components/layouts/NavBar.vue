@@ -1,6 +1,6 @@
 <template>
 	<component
-		:is="isMobile ? 'mobile-nav-bar' : 'desktop-nav-bar'"
+		:is="isPortableDevice ? 'mobile-nav-bar' : 'desktop-nav-bar'"
 		:menus="menus"
 	/>
 </template>
