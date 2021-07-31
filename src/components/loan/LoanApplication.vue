@@ -250,6 +250,7 @@ export default {
 			});
 		},
 		async submit() {
+      this.toggleLoading(true);
 			this.isCreating = true;
 			const { id, lastname, firstname } = this.profile;
 			await this.dispatch('loan/createLoan', {
@@ -260,6 +261,7 @@ export default {
 				approved: false,
 			});
 			this.isCreating = false;
+      this.toggleLoading(false);
 		},
 	},
 	computed: {
