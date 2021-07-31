@@ -31,7 +31,7 @@ export default {
     try {
       const response = await api.get('loans', {
         params: {
-          ownderID: rootState.user.profile.id
+          ownerID: rootState.user.profile.id
         }
       });
       if (response.status !== 200) return;

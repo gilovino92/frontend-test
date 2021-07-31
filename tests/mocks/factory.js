@@ -5,8 +5,11 @@ import Vuetify from 'vuetify';
 import storeObject from './store';
 import i18n from './i18Mock';
 import globalStubs from 'mocks/stubs';
+import currencyFormat from '@/filters/currencyFormat';
 
 const localVue = createLocalVue();
+localVue.filter('currency', currencyFormat);
+
 const vuetify = new Vuetify();
 
 export const factory = async ({

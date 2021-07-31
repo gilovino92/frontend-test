@@ -1,12 +1,12 @@
 import { factory } from 'mocks/factory';
-import component from '@/components/card/CardControl.vue';
+import component from '@/views/Credit.vue';
 import MockAdapter from 'axios-mock-adapter';
 
 const mock = new MockAdapter();
 const props = {
   component
 };
-describe('CardControl.vue', () => {
+describe('Credit.vue', () => {
   let wrapper;
 
   beforeEach(async () => {

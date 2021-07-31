@@ -1,4 +1,4 @@
-import { api } from '@httpClient/axios';
+import { api } from '@/httpClient/axios';
 export default {
   async getUserProfile({ commit }) {
     try {

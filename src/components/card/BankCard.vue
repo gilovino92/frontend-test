@@ -82,7 +82,7 @@ export default {
 	},
 	computed: {
 		formatCardNumber() {
-			return this.card.number.replaceAll(' ', '').match(/.{1,4}/g);
+			return this.card.number.replace(/ /g, '').match(/.{1,4}/g);
 		},
 	},
 };
