@@ -1,0 +1,14 @@
+.cards-page {
+  .view-content {
+    padding: 60px;
+  }
+  @media only screen and (max-width: 1264px) {
+    .view-content {
+      .mobile-logo {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+      padding: 24px;
+    }
+  }
+}

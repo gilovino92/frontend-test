@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import widgets from '@/components/cards/Widgets';
+import widgets from '@/components/card/Widgets';
 export default {
 	name: 'CardWidgets',
 	components: {

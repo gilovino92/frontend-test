@@ -1,5 +1,6 @@
 <template>
 	<v-app class="app-wrapper">
+		<!-- toarst -->
 		<v-snackbar v-model="snackbar" :color="message.color" top right>
 			{{ message.text }}
 
@@ -7,10 +8,11 @@
 				<v-btn text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
 			</template>
 		</v-snackbar>
+		<!-- Overlay loading -->
 		<v-overlay
 			:value="overlay"
 			opacity="0.3"
-			z-index="2"
+			z-index="5"
 			style="height: 100%; width: 100%"
 		>
 			<v-progress-circular
@@ -20,23 +22,10 @@
 				:size="50"
 			></v-progress-circular>
 		</v-overlay>
+		<!-- main route view -->
+		<router-view></router-view>
 
-		<v-main
-			class="main-wrapper"
-			:class="{
-				'away-from-nav': !isPortableDevice,
-				secondary: isPortableDevice,
-			}"
-		>
-			<v-icon
-				color="primary"
-				size="25"
-				class="mobile-logo"
-				v-if="isPortableDevice"
-				>$MobileLogo</v-icon
-			>
-			<router-view></router-view>
-		</v-main>
+		<!-- Navigation Menu -->
 		<nav-bar />
 	</v-app>
 </template>

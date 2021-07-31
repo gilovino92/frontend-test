@@ -9,7 +9,7 @@ export default {
         'app/toggleMessage',
         {
           display: true,
-          text: 'Repaid',
+          text: 'Loan Created',
           color: 'success'
         },
         { root: true }

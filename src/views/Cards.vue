@@ -1,22 +1,16 @@
 <template>
-	<div
-		class="card-view"
-		elevation="0"
-		:class="{
-			'white--text mobile-mode': isPortableDevice,
-			' py-15 white desktop-mode': !isPortableDevice,
-		}"
+	<main-layout
+		class="cards-page"
+		:hasSlideOver="isPortableDevice && tab === 'debit_cards'"
 	>
-		<div class="fixed-content">
-			<div class="d-flex justify-space-between align-end pa-6">
-				<available-balance />
-			</div>
+		<template>
+			<available-balance />
 			<v-tabs
 				v-model="tab"
 				:color="isPortableDevice ? 'white' : 'black'"
 				:dark="isPortableDevice"
 				background-color="transparent"
-				class="mb-4 px-6"
+				class="mb-4"
 			>
 				<v-tabs-slider color="#23CEFD"></v-tabs-slider>
 				<v-tab
@@ -30,10 +24,10 @@
 					>All company cards</v-tab
 				>
 			</v-tabs>
-			<v-tabs-items v-model="tab" touchless>
+			<v-tabs-items v-model="tab" touchless class="transparent-tabs">
 				<v-tab-item value="debit_cards">
 					<!-- Template for Mobile -->
-					<div class="card-mobile" v-if="isPortableDevice">
+					<div v-if="isPortableDevice">
 						<swiper
 							class="swiper"
 							:options="swiperOption"
@@ -79,25 +73,22 @@
 				</v-tab-item>
 				<v-tab-item value="all_cards"> </v-tab-item>
 			</v-tabs-items>
-		</div>
-		<!-- Controller for mobile -->
-		<div
-			class="mobile-controller pb-6"
-			v-show="isPortableDevice && tab === 'debit_cards'"
-		>
+		</template>
+		<template v-slot:slide-over>
 			<card-control :controllers="controllers" class="pa-4" color="#EDF3FF" />
 			<div class="pa-6">
 				<card-widgets :widgets="widgets" />
 			</div>
-		</div>
-	</div>
+		</template>
+	</main-layout>
 </template>
 
 <script>
-import AvailableBalance from '@/components/cards/AvailableBalance.vue';
-import BankCard from '@/components/cards/BankCard.vue';
-import CardControl from '@/components/cards/CardControl.vue';
-import CardWidgets from '@/components/cards/CardWidgets.vue';
+import AvailableBalance from '@/components/card/AvailableBalance.vue';
+import BankCard from '@/components/card/BankCard.vue';
+import CardControl from '@/components/card/CardControl.vue';
+import CardWidgets from '@/components/card/CardWidgets.vue';
+import MainLayout from '@/components/layouts/MainLayout';
 
 // @ is an alias to /src
 export default {
@@ -165,6 +156,7 @@ export default {
 		BankCard,
 		CardControl,
 		CardWidgets,
+		MainLayout,
 	},
 	methods: {},
 	created() {},
@@ -177,49 +169,41 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.swiper {
-	::v-deep .swiper-pagination-bullet-custom {
-		text-align: center;
-		opacity: 0.7;
-		border-radius: 8px;
-		background-color: #ccf6e1;
-		&:hover {
-			opacity: 1;
-		}
+.v-main.cards-page {
+	.left-column {
+		max-width: 414px;
+	}
+	.right-column {
+		width: 100%;
+	}
+	.swiper {
+		::v-deep .swiper-pagination-bullet-custom {
+			text-align: center;
+			opacity: 0.7;
+			border-radius: 8px;
+			background-color: #ccf6e1;
+			&:hover {
+				opacity: 1;
+			}
 
-		&.swiper-pagination-bullet-active {
-			opacity: 1;
-			background-color: #01d167;
-			width: 16px !important;
-			height: 8px !important;
+			&.swiper-pagination-bullet-active {
+				opacity: 1;
+				background-color: #01d167;
+				width: 16px !important;
+				height: 8px !important;
+			}
 		}
 	}
-}
-.card-view {
-	min-height: 100vh;
-	&.mobile-mode {
-		.fixed-content {
-			background-color: var(--v-secondary-base);
-			position: fixed;
-			width: 100%;
-			top: 0;
-			bottom: 0;
-		}
-		.bank-card {
-			transform: scale(0.8);
-		}
+	@media only screen and (max-width: 1264px) {
 		.swiper-slide {
 			align-items: center;
 			justify-content: center;
 			display: flex;
 		}
-		.mobile-controller {
-			z-index: 2;
-			overflow-x: hidden;
-			margin-top: 455px;
-			min-height: 100vh;
-			position: relative;
-			background-color: white;
+		.bank-card {
+			transform: scale(0.8);
+		}
+		.slide-over {
 			border-top-left-radius: 16px;
 			border-top-right-radius: 16px;
 			.card-control {
@@ -229,18 +213,6 @@ export default {
 				border-bottom-right-radius: 0;
 			}
 		}
-	}
-	&.desktop-mode {
-		.left-column {
-			max-width: 414px;
-		}
-		.right-column {
-			width: 100%;
-		}
-	}
-
-	.v-tabs-items {
-		background-color: transparent !important;
 	}
 }
 </style>

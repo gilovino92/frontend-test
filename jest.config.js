@@ -38,6 +38,11 @@ module.exports = {
     '!**/node_modules/**',
     '!src/**/main.js',
     '!src/helpers/**',
+    '!src/httpClient/**',
+    '!src/locales/**',
+    '!src/plugins/**',
+    '!src/router/**',
+    '!src/style/**',
     '!src/**/vuetify.js',
     '!src/store/index.js'
   ]

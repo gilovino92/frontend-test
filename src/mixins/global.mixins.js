@@ -1,4 +1,4 @@
-import { unFreeze, freeze } from '@/helpers/freezeBackground';
+import { unFreeze, freeze } from '@/helpers/common';
 import storeMixins from '@/mixins/store.mixins';
 import CustomIcon from '@/components/layouts/CustomIcon';
 export default {
@@ -26,26 +26,12 @@ export default {
       }
       this.dispatch('app/toggleLoading', value);
     },
-    navigate(location) {
-      // Do something before routing
-      this.$router.push(
-        location,
-        function() {
-          // Do something with the store after finish routing
-        }.bind(this)
-      );
-    },
-    back() {
-      // Do something before goback
-      this.$router.go(-1);
-    },
     onResize() {
       this.isPortableDevice = window.innerWidth < 1264;
     }
   },
   mounted() {
     this.onResize();
-
     window.addEventListener('resize', this.onResize, { passive: true });
   },
   beforeDestroy() {

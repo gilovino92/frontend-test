@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import AddNewCard from '@/components/cards/AddNewCard.vue';
+import AddNewCard from '@/components/card/AddNewCard.vue';
 
 export default {
 	name: 'AvailableBalance',

@@ -1,20 +1,26 @@
 <template>
-	<v-card class="mt-6 payment-view padding-from-nav transparent">
-		<v-row class="mx-0 pb-2">
-			<v-col cols="12" md="6">
-				<h2 class="page-title mb-2">Loans</h2>
-				<loans class="border-radius-8" />
-			</v-col>
-			<v-col cols="12" md="6">
-				<h2 class="page-title mb-2">Transactions</h2>
-				<recent-transactions class="border-radius-8" />
-			</v-col>
-		</v-row>
-	</v-card>
+	<main-layout class="payment-page">
+		<slot>
+			<div class="page-title">Payments</div>
+			<div class="payment-view transparent">
+				<v-row class="mx-0 pb-2">
+					<v-col cols="12" md="6">
+						<h3 class="mb-2">Loans</h3>
+						<loans class="border-radius-8" />
+					</v-col>
+					<v-col cols="12" md="6">
+						<h3 class="mb-2">Transactions</h3>
+						<recent-transactions class="border-radius-8" />
+					</v-col>
+				</v-row>
+			</div>
+		</slot>
+	</main-layout>
 </template>
 
 <script>
-import RecentTransactions from '../components/cards/RecentTransactions.vue';
+import RecentTransactions from '@/components/card/RecentTransactions.vue';
+import MainLayout from '@/components/layouts/MainLayout.vue';
 import Loans from '../components/loan/Loans.vue';
 // @ is an alias to /src
 export default {
@@ -25,6 +31,7 @@ export default {
 	components: {
 		Loans,
 		RecentTransactions,
+		MainLayout,
 	},
 	computed: {},
 	methods: {},
@@ -32,8 +39,4 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.payment-view {
-	overflow-y: hidden;
-	z-index: 1;
-}
 </style>
